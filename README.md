@@ -1,2 +1,2 @@
 # Clock
-Creating Clock apps with some futures by JAVA for training purpose 
+Creating Clock app with some futures by JAVA for training purpose 
