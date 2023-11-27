@@ -10,7 +10,7 @@ public class Main {
 		
 		DigitalClock dc = new DigitalClock();
 	
-			
+		
 	
 	}
 

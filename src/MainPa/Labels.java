@@ -19,23 +19,10 @@ public class Labels extends JLabel {
 	  Font font;
 
 
-	  
+	  public Labels() {}
 	public Labels (String type)
 	{
-		try {
-		     //Returned font is of pt size 1
-		     font = Font.createFont(Font.TRUETYPE_FONT, new File("digital-7.ttf"));
-		     //adding font from file, after 
-		     //adding the file in project's main folder.
-		     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		         ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("digital-7.ttf")));
-		     //Derive and return a 12 pt version:
-		     //Need to use float otherwise
-		     //it would be interpreted as style
-	} catch (IOException|FontFormatException e) {
-		     // Handle exception
-				e.getMessage();
-		}
+		addNewFont();
 		this.setForeground(Color.GREEN);
 		this.type = type;
 		switch (type)
@@ -58,6 +45,23 @@ public class Labels extends JLabel {
 		}
 		
 	}
-
 	
+	
+	private void addNewFont()
+	{
+		try {
+		     //Returned font is of pt size 1
+		     font = Font.createFont(Font.TRUETYPE_FONT, new File("digital-7.ttf"));
+		     //adding font from file, after 
+		     //adding the file in project's main folder.
+		     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		         ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("digital-7.ttf")));
+		     //Derive and return a 12 pt version:
+		     //Need to use float otherwise
+		     //it would be interpreted as style
+	} catch (IOException|FontFormatException e) {
+		     // Handle exception
+				e.getMessage();
+		}
+	}
 }

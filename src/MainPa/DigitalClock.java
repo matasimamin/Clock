@@ -22,6 +22,7 @@ public class DigitalClock {
 	}
 	
 	private void initialize() {
+	
 		frame = new JFrame();
 		menu = new Menu();
 		panel = new JPanel();
