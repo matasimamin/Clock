@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 
 public class DigitalClock {
 		JFrame frame;
+		Menu menu;
 		JPanel panel; 
 		Labels time,date,day;
 	
@@ -21,6 +23,7 @@ public class DigitalClock {
 	
 	private void initialize() {
 		frame = new JFrame();
+		menu = new Menu();
 		panel = new JPanel();
 		date= new Labels("date");
 		time= new Labels("time");
@@ -41,16 +44,22 @@ public class DigitalClock {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.setLayout(new BorderLayout() );
+		frame.setResizable(true);
+		frame.setLayout(new BorderLayout());
+		frame.add(menu,BorderLayout.NORTH);
 		frame.add(panel,BorderLayout.CENTER);
+		
 		/*=========PANEL========== */
 		panel.setLayout(new GridLayout(3,1));
+
 		panel.setBackground(Color.black);
 		panel.add(date);
 		panel.add(time);
 		panel.add(day);
+		
+	    
 		getTime();
+		
 
 	}
 	
