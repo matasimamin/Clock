@@ -3,7 +3,7 @@ To be reslased in V2
 
 1. Creat text-to-speach (TTS)
 2. frame.place();
-3.abbility to change colors
+3.abbility to change colors  // pass !! under testing
 4.signal when time is on full hour (00:00)
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
