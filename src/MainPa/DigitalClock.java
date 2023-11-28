@@ -5,12 +5,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class DigitalClock {
+public class DigitalClock implements MenuClickable {
 		JFrame frame;
 		Menu menu;
 		JPanel panel; 
@@ -24,7 +25,7 @@ public class DigitalClock {
 	private void initialize() {
 	
 		frame = new JFrame();
-		menu = new Menu();
+		menu = new Menu(this);
 		panel = new JPanel();
 		date= new Labels("date");
 		time= new Labels("time");
@@ -58,6 +59,8 @@ public class DigitalClock {
 		panel.add(time);
 		panel.add(day);
 		
+		
+		
 	    
 		getTime();
 		
@@ -89,7 +92,43 @@ public class DigitalClock {
 		}
 	}
 	
+	public void newFont (Font font)
+	{
+		date.setFont(font);
+		time.setFont(font);
+		day.setFont(font);
+		
+	}
 	
+	public void newColor(Color color)
+	{
+		date.setForeground(color);
+		time.setForeground(color);
+		day.setForeground(color);
+	}
+
+
+	@Override
+	public void onColorChangeRed() {
+		// TODO Auto-generated method stub
+		newColor(Color.red);
+		System.out.println("Red");
+	}
+
+	@Override
+	public void onColorChangeBlue() {
+		// TODO Auto-generated method stub
+		newColor(Color.blue);
+		System.out.println("Blue");
+	}
+
+	@Override
+	public void onColorChangeGreen() {
+		// TODO Auto-generated method stub
+		newColor(Color.green);
+		System.out.println("Green");
+	}
+
 
 }
 

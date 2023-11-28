@@ -14,11 +14,14 @@ public class Menu extends JPanel implements ActionListener  {
 	
 	
 	JMenuBar mBar ;
-	 JMenu settings;
-	JMenuItem color;
+	 JMenu settings,colors;
+	JMenuItem red,blue,green;
+	MenuClickable menuClickable;
+
 	
-	public Menu ()
-	{
+	public Menu (MenuClickable colorChangeListener)
+	
+	{this.menuClickable = colorChangeListener;
 		initialize();
 	}
 	
@@ -26,13 +29,28 @@ public class Menu extends JPanel implements ActionListener  {
 	public void initialize ()
 	{
 		this.setLayout(new GridLayout(1,1));
+		/*initializing*/
 		mBar = new JMenuBar();
 		settings = new JMenu("Settings");
-		color = new JMenuItem("Color");
-		color.addActionListener(this);
+		colors = new JMenu("Color");
+		red = new JMenuItem("Red");
+		green = new JMenuItem("Green");
+		blue = new JMenuItem("Blue");
+		
+		/*Adding to UI*/
+		colors.add(red);
+		colors.add(green);
+		colors.add(blue);
 		this.add(mBar);
 		mBar.add(settings);
-		settings.add(color);
+		settings.add(colors);
+		/*Adding as ActionListner*/
+		red.addActionListener(this);
+		green.addActionListener(this);
+		blue.addActionListener(this);
+			
+
+		
 		
 	}
 
@@ -40,12 +58,22 @@ public class Menu extends JPanel implements ActionListener  {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==color)
+		if (menuClickable != null)
 		{
-		
+			if(e.getSource()==red)
+			{
+		                menuClickable.onColorChangeRed();
+			
+			} else if(e.getSource()==blue)
+			{
+			    menuClickable.onColorChangeBlue();
+			
+			} else if (e.getSource()==green)
+			{
+				menuClickable.onColorChangeGreen();
+			
+			} 
 		}
 		
 	}
-	
-
 }

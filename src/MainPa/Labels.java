@@ -64,4 +64,11 @@ public class Labels extends JLabel {
 				e.getMessage();
 		}
 	}
+	
+	void newColor (Color color)
+	{
+		this.setForeground(color);
+		
+	}
+	
 }
