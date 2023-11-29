@@ -7,11 +7,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class DigitalClock implements MenuClickable {
+public class DigitalClock implements ActionListener {
 		JFrame frame;
 		Menu menu;
 		JPanel panel; 
@@ -30,16 +33,7 @@ public class DigitalClock implements MenuClickable {
 		date= new Labels("date");
 		time= new Labels("time");
 		day= new Labels("day");
-	/*	This way is used to manipulate font for every different label by The font class, 
-	 * this in not prefer to me because you have you use so many in try/catch block
-		try {
-			FontUtility baseFont = new FontUtility("digital-7.ttf",Font.PLAIN);
-			baseFont.applyFontSize(80f, time);
-		} catch (IOException |FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		*/
+	
 		/*========FRAME===========*/
 		frame.setTitle("My Clock");
 		frame.setSize(600, 250);
@@ -107,28 +101,36 @@ public class DigitalClock implements MenuClickable {
 		day.setForeground(color);
 	}
 
-
 	@Override
-	public void onColorChangeRed() {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		newColor(Color.red);
-		System.out.println("Red");
+		if (e.getSource()==menu.getRed())
+		{
+			this.newColor(Color.RED);
+			System.out.print("From digital red ");
+		}
+		else if(e.getSource()==menu.getBlue())
+		{
+			this.newColor(Color.BLUE);
+			System.out.print("From digital blue ");
+		}
+		else if(e.getSource()==menu.getGreen())
+		{
+			this.newColor(Color.GREEN);
+			System.out.print("From digital blue ");
+		}
+			
 	}
-
-	@Override
-	public void onColorChangeBlue() {
-		// TODO Auto-generated method stub
-		newColor(Color.blue);
-		System.out.println("Blue");
-	}
-
-	@Override
-	public void onColorChangeGreen() {
-		// TODO Auto-generated method stub
-		newColor(Color.green);
-		System.out.println("Green");
-	}
-
 
 }
 
+/*	This way is used to manipulate font for every different label by The font class, 
+ * this in not prefer to me because you have you use so many in try/catch block
+	try {
+		FontUtility baseFont = new FontUtility("digital-7.ttf",Font.PLAIN);
+		baseFont.applyFontSize(80f, time);
+	} catch (IOException |FontFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	*/
