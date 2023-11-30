@@ -1,15 +1,23 @@
 package MainPa;
 
 import java.awt.BorderLayout;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,6 +27,7 @@ public class DigitalClock implements ActionListener {
 		Menu menu;
 		JPanel panel; 
 		Labels time,date,day;
+		final static String SOUND_FILE = "hourChime.wav";
 	
 	public DigitalClock	()
 	{
@@ -26,7 +35,6 @@ public class DigitalClock implements ActionListener {
 	}
 	
 	private void initialize() {
-	
 		frame = new JFrame();
 		menu = new Menu(this);
 		panel = new JPanel();
@@ -52,6 +60,8 @@ public class DigitalClock implements ActionListener {
 		panel.add(date);
 		panel.add(time);
 		panel.add(day);
+
+		
 		
 		
 		
@@ -66,16 +76,20 @@ public class DigitalClock implements ActionListener {
 		while (true)
 		{
 			LocalDateTime  ld = LocalDateTime.now();
-			DateTimeFormatter timeText = DateTimeFormatter.ofPattern("HH:mm:ss");
+			DateTimeFormatter timeText = DateTimeFormatter.ofPattern("HH:mm:ss a");
 			DateTimeFormatter dayText = DateTimeFormatter.ofPattern("EEEE");
 			DateTimeFormatter dateText = DateTimeFormatter.ofPattern("yyyy - M - d");
+			if (ld.getMinute()==59 && ld.getSecond()==59)
+			{
+				playHourlyChime();
+			}
 			String TimeText = ld.format(timeText);
 			String DayText = ld.format(dayText);
 			String DateText = ld.format(dateText);
 			date.setText(DateText);
 			time.setText(TimeText);
 			day.setText(DayText);
-
+			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -121,6 +135,21 @@ public class DigitalClock implements ActionListener {
 		}
 			
 	}
+	
+	
+	private static void playHourlyChime() {
+        try {
+        	// Play sound when hour strike this method used inside getTime()
+            File soundFile = new File(SOUND_FILE);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 
